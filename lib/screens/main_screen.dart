@@ -1,4 +1,8 @@
+import 'package:flower_app/screens/add_screen.dart';
+import 'package:flower_app/screens/flower_view_screen.dart';
 import 'package:flower_app/screens/home_screen.dart';
+import 'package:flower_app/screens/list_screen.dart';
+import 'package:flower_app/screens/my_flowers.dart';
 import 'package:flower_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -11,7 +15,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreen extends State<MainScreen> {
 
   int _currentIndex = 0;
-  final titleList = ['FlowerApp','Flower','My Flowers','Add Flower'];
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,32 +27,25 @@ class _MainScreen extends State<MainScreen> {
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),
         items: [
-          /// Home
           SalomonBottomBarItem(
             icon: Icon(Icons.home),
             title: Text("Home"),
-            selectedColor: Colors.purple,
+            selectedColor: darkGreen,
           ),
-
-          /// Likes
           SalomonBottomBarItem(
-            icon: Icon(Icons.favorite_border),
-            title: Text("Likes"),
-            selectedColor: Colors.pink,
+            icon: Icon(Icons.list),
+            title: Text("All Flowers"),
+            selectedColor: darkGreen,
           ),
-
-          /// Search
           SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
+            icon: Icon(Icons.add_circle_outline),
+            title: Text("Add"),
+            selectedColor: darkGreen,
           ),
-
-          /// Profile
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
-            title: Text("Profile"),
-            selectedColor: Colors.teal,
+            title: Text("My Flowers"),
+            selectedColor: darkGreen,
           ),
         ],
       )),
@@ -59,10 +56,16 @@ class _MainScreen extends State<MainScreen> {
   _getBody(int index){
     switch(index){
       case 0: return HomeScreen();
-      case 1: return null;
-      case 2: return null;
-      case 3: return null;
+      case 1: return ListScreen(goBack: backToHome,);
+      case 2: return AddScreen(goBack: backToHome,);
+      case 3: return MyFlowers(goBack: backToHome,);
     }
+  }
+
+  backToHome(){
+    setState(() {
+      _currentIndex = 0;
+    });
   }
 
 

@@ -7,4 +7,4 @@ const medPink = Color(0xFFDAA2DA);
 const darkPink = Color(0xFFDE8CF0);
 
 const logoPink = Color(0xFFFBCFDB);
-const lightPink2 = Color(0xFFFCEAFB);
+const lightPink2 = Color(0xFFFDF5FD);
