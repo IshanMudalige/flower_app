@@ -1,5 +1,4 @@
 import 'package:flower_app/screens/add_screen.dart';
-import 'package:flower_app/screens/flower_view_screen.dart';
 import 'package:flower_app/screens/home_screen.dart';
 import 'package:flower_app/screens/list_screen.dart';
 import 'package:flower_app/screens/my_flowers.dart';

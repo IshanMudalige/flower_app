@@ -9,7 +9,6 @@ class FlowerApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flower App',
       theme: ThemeData(
-        //primarySwatch: Colors.blue,
         accentColor:lightPink
       ),
       home: MainScreen(),

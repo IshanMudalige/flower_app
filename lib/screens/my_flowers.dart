@@ -22,20 +22,20 @@ class _MyFlowers extends State<MyFlowers> {
 
   String url;
   bool isLoaded = false;
-  final flowerList = [];
+  final flwList = [];
 
   @override
   void initState() {
     super.initState();
     Firebase.initializeApp().whenComplete(() => {
-          getFlowersList(),
+          getMyFlowersList(),
         });
   }
 
-  getFlowersList() async {
+  getMyFlowersList() async {
     isLoaded = false;
-    flowerList.clear();
-    print('>>>>>>>>>>>>>> getting flowers');
+    flwList.clear();
+    print('>>>>>>>>>>>>>> getting my flowers');
     final dbRef = FirebaseDatabase.instance.reference().child('FlowersList');
     DataSnapshot dataSnapshot = await dbRef.once();
     Map<dynamic, dynamic> map = dataSnapshot.value;
@@ -49,7 +49,7 @@ class _MyFlowers extends State<MyFlowers> {
         Reference ref = storage.ref().child(flower.imgName);
         flower.imgUrl = (await ref.getDownloadURL()).toString();
         setState(() {
-          if (flower.token == 'my') flowerList.add(flower);
+          if (flower.token == 'my') flwList.add(flower);
           isLoaded = true;
         });
       });
@@ -88,9 +88,9 @@ class _MyFlowers extends State<MyFlowers> {
     return isLoaded ? Container(
       margin: EdgeInsets.fromLTRB(4, 10, 4, 0),
       child: ListView.builder(
-          itemCount: flowerList.length,
+          itemCount: flwList.length,
           itemBuilder: (context, index) {
-            return listItem(flowerList[index],index);
+            return listItem(flwList[index],index);
           }),
     ) : Center(child: CircularProgressIndicator(),);
   }
@@ -190,7 +190,7 @@ class _MyFlowers extends State<MyFlowers> {
                             ),
                           ),
                         ),
-                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => UpdateScreen(flower: flower,)),).whenComplete(() => getFlowersList());},
+                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => UpdateScreen(flower: flower,)),).whenComplete(() => getMyFlowersList());},
                       ),
                     ],
                   ),
@@ -218,7 +218,7 @@ class _MyFlowers extends State<MyFlowers> {
           onPressed: () {
             FirebaseDatabase.instance.reference().child("FlowersList").child(id).remove();
             setState(() {
-              flowerList.removeAt(index);
+              flwList.removeAt(index);
             });
             Navigator.of(context).pop();
           },

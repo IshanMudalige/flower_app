@@ -165,6 +165,12 @@ class _AddScreen extends State<AddScreen> {
           color: Colors.grey,
           fontSize: 14.0,
         ),
+        focusedBorder:OutlineInputBorder(
+          borderSide: const BorderSide(color: lightPink,),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        labelText: hintText,
+        labelStyle: TextStyle(color: Colors.grey,),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

@@ -57,7 +57,6 @@ class _ListScreen extends State<ListScreen> {
           else if(cat == flower.cat){
             flowerList.add(flower);
           }
-
           isLoaded = true;
         });
       });
@@ -93,7 +92,6 @@ class _ListScreen extends State<ListScreen> {
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             childAspectRatio: (width/2 / 220),
             maxCrossAxisExtent: width/2,
-            //mainAxisExtent: width-200,
             crossAxisSpacing: 8,
             mainAxisSpacing: 8),
         itemCount: flowerList.length,

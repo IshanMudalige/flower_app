@@ -55,8 +55,8 @@ class _UpdateScreen extends State<UpdateScreen> {
     });
   }
 
-  void saveResult() async {
-    print(">>>>>>>>>> saving");
+  void updateResult() async {
+    print(">>>>>>>>>> updating");
     String fileName = basename(_image.path);
 
     try {
@@ -173,6 +173,12 @@ class _UpdateScreen extends State<UpdateScreen> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
+        focusedBorder:OutlineInputBorder(
+          borderSide: const BorderSide(color: lightPink,),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        labelText: hintText,
+        labelStyle: TextStyle(color: Colors.grey,),
       ),
     );
   }
@@ -195,7 +201,7 @@ class _UpdateScreen extends State<UpdateScreen> {
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }else {
               _validate = false;
-              saveResult();
+              updateResult();
               // Navigator.pop(context);
               final snackBar = SnackBar(
                 backgroundColor: lightPink2,
