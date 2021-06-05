@@ -105,14 +105,7 @@ class _UpdateScreen extends State<UpdateScreen> {
             'Update Flower',
             style: TextStyle(color: Colors.black),
           ),
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_sharp,
-            ),
-            onPressed: () {Navigator.pop(context);},
-            color: Colors.black,
-            splashRadius: 20,
-          ),
+          iconTheme: IconThemeData(color: Colors.black),
         ),
         body: _body(context));
   }
@@ -203,7 +196,12 @@ class _UpdateScreen extends State<UpdateScreen> {
             }else {
               _validate = false;
               saveResult();
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              final snackBar = SnackBar(
+                backgroundColor: lightPink2,
+                content: Text('Flower updated successfully',style:TextStyle(color:darkPink)),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           });
         },
