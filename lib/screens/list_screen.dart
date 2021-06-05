@@ -66,6 +66,8 @@ class _ListScreen extends State<ListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: lightPink2,
       appBar: AppBar(
@@ -86,19 +88,23 @@ class _ListScreen extends State<ListScreen> {
   }
 
   Widget _body(){
-    return isLoaded ? Container(
-        margin: EdgeInsets.fromLTRB(16,16,16,0),
-        child:GridView.builder(
-
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing:15,mainAxisSpacing: 15),
-      itemBuilder: (_, index) => listItem(flowerList[index]),
-      itemCount:flowerList.length,
-    )):Center(child: CircularProgressIndicator(),);
+    return isLoaded ? GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            childAspectRatio: (width/2 / 220),
+            maxCrossAxisExtent: width/2,
+            //mainAxisExtent: width-200,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8),
+        itemCount: flowerList.length,
+        itemBuilder: (BuildContext ctx, index) {
+          return listItem(flowerList[index]);
+        }) : Center(child: CircularProgressIndicator(),);
   }
 
   Widget listItem(Flower flower){
     return InkWell(child:Container(
-      height: 180,
+      margin: EdgeInsets.only(left:10,right: 10,top: 8,bottom: 8),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),

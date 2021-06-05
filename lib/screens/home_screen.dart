@@ -58,6 +58,8 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: lightPink2,
       appBar: AppBar(
@@ -115,8 +117,8 @@ class _HomeScreen extends State<HomeScreen> {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 8),
-            height: 90,
-            width: 90,
+            height: width*0.21,
+            width: width*0.21,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -139,24 +141,40 @@ class _HomeScreen extends State<HomeScreen> {
 
   Widget listArea(){
     return isLoaded ? GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 16,mainAxisSpacing: 20),
-      itemBuilder: (_, index) => listItem(flowerList[index]),
-      itemCount:flowerList.length,
-    ) : Center(child: CircularProgressIndicator(),);
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          childAspectRatio: (width/2 / 220),
+            maxCrossAxisExtent: width/2,
+            //mainAxisExtent: width-200,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16),
+        itemCount: flowerList.length,
+        itemBuilder: (BuildContext ctx, index) {
+          return listItem(flowerList[index]);
+        }) : Center(child: CircularProgressIndicator(),);
+
+
+
+    // GridView.builder(
+    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 16,mainAxisSpacing: 20),
+    //   itemBuilder: (_, index) => listItem(flowerList[index]),
+    //   itemCount:flowerList.length,
+    // ) : Center(child: CircularProgressIndicator(),);
 
   }
 
 
   Widget listItem(Flower flower){
     return InkWell(child:Container(
-      height: 180,
+      margin: EdgeInsets.only(left:2,right: 2,),
+      //height: 180,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         boxShadow: [ BoxShadow(
           color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 1,
-          blurRadius: 5,
+          spreadRadius: 0.5,
+          blurRadius: 3,
           offset: Offset(0, 3), // changes position of shadow
         ),],
       ),

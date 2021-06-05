@@ -33,6 +33,7 @@ class _MyFlowers extends State<MyFlowers> {
   }
 
   getFlowersList() async {
+    isLoaded = false;
     flowerList.clear();
     print('>>>>>>>>>>>>>> getting flowers');
     final dbRef = FirebaseDatabase.instance.reference().child('FlowersList');
