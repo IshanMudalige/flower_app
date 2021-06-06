@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -49,7 +50,7 @@ class _MyFlowers extends State<MyFlowers> {
         Reference ref = storage.ref().child(flower.imgName);
         flower.imgUrl = (await ref.getDownloadURL()).toString();
         setState(() {
-          if (flower.token == 'my') flwList.add(flower);
+          if (flower.token == FirebaseAuth.instance.currentUser.uid) flwList.add(flower);
           isLoaded = true;
         });
       });

@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flower_app/model/flower.dart';
 import 'package:flower_app/screens/flower_view_screen.dart';
 import 'package:flower_app/screens/list_screen.dart';
+import 'package:flower_app/screens/login_screen.dart';
 import 'package:flower_app/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +52,12 @@ class _HomeScreen extends State<HomeScreen> {
     }
   }
 
+  _signOut() async{
+    await FirebaseAuth.instance.signOut().whenComplete(() => {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => (LoginScreen()),),)
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -78,6 +86,9 @@ class _HomeScreen extends State<HomeScreen> {
               style: TextStyle(color: darkGreen),
             )
           ]),
+          actions: [
+            IconButton(icon: Icon(Icons.logout),onPressed: (){_signOut();},)
+          ],
         ),
         body: _body());
   }

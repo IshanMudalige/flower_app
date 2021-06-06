@@ -66,7 +66,7 @@ class _UpdateScreen extends State<UpdateScreen> {
         'desc': controllerDesc.text,
         'cat': controllerCat.text,
         'imgName': fileName,
-        'token':'my',
+        'token':widget.flower.token,
         'id':widget.flower.id,
         'rating':widget.flower.rating
       });
@@ -186,7 +186,7 @@ class _UpdateScreen extends State<UpdateScreen> {
   Widget button(BuildContext context) {
     return ConstrainedBox(
       constraints:
-      BoxConstraints.expand(width: width * 0.6, height: height * 0.07),
+      BoxConstraints.expand(height: height * 0.07),
       child: ElevatedButton(
         onPressed: () {
           setState(() {
@@ -216,7 +216,7 @@ class _UpdateScreen extends State<UpdateScreen> {
           primary: darkPink,
           textStyle: TextStyle(color: Colors.white),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
     );

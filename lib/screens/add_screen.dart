@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flower_app/utils/colors.dart';
@@ -31,7 +32,7 @@ class _AddScreen extends State<AddScreen> {
   final _picker = ImagePicker();
 
   Future getImageFromCamera() async {
-    PickedFile image = await _picker.getImage(source: ImageSource.camera);
+    PickedFile image = await _picker.getImage(source: ImageSource.camera,imageQuality: 60,maxWidth: 600,maxHeight: 400);
 
     setState(() {
       _image = File(image.path);
@@ -39,7 +40,7 @@ class _AddScreen extends State<AddScreen> {
   }
 
   Future getImageFromGallery() async {
-    PickedFile image = await _picker.getImage(source: ImageSource.gallery);
+    PickedFile image = await _picker.getImage(source: ImageSource.gallery,);
 
     setState(() {
       _image = File(image.path);
@@ -57,7 +58,7 @@ class _AddScreen extends State<AddScreen> {
         'desc': controllerDesc.text,
         'cat': controllerCat.text,
         'imgName': fileName,
-        'token':'my',
+        'token':FirebaseAuth.instance.currentUser.uid,
         'id':time,
         'rating':'.'
       });
@@ -181,7 +182,7 @@ class _AddScreen extends State<AddScreen> {
   Widget button(BuildContext context) {
     return ConstrainedBox(
       constraints:
-          BoxConstraints.expand(width: width * 0.6, height: height * 0.07),
+          BoxConstraints.expand( height: height * 0.07),
       child: ElevatedButton(
         onPressed: () {
           setState(() {
@@ -216,7 +217,7 @@ class _AddScreen extends State<AddScreen> {
           primary: darkPink,
           textStyle: TextStyle(color: Colors.white),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
     );
